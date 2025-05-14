@@ -1,0 +1,57 @@
+@import "tailwindcss";
+/* @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap'); */
+
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+*{
+  outline: none;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #061224;
+    --foreground: #ededed;
+  }
+}
+.color{
+  color: #0e2444;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+.transition-class{
+  transition: all .4s ease;
+}
+/* Scrollbar for Webkit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 8px; /* Adjust scrollbar width */
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1A1F29; /* Dark background */
+  border-radius: 8px; /* Rounded track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #344A62; /* Slightly lighter blue for contrast */
+  border-radius: 8px; /* Rounded thumb */
+  border: 2px solid #1A1F29; /* Adds a smooth separation */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3E5C76; /* Hover effect for smooth UX */
+}
+
