@@ -1,5 +1,9 @@
+
 import Image from "next/image";
+import ConnectButton from "./connect-button";
 function Heading() {
+
+
 
     return (
       <div className="flex justify-between items-center w-full">
@@ -13,15 +17,15 @@ function Heading() {
                 objectFit="contain"
                 objectPosition="center"
               ></Image>
+              {/* // "viem": "^2.27.3", // "wagmi": "^2.14.16", //
+              "@rainbow-me/rainbowkit": "^2.2.3", // "@reown/appkit": "^1.7.3",
+              // "@reown/appkit-adapter-wagmi": "^1.7.3", // "ethers": "^6.13.5" */}
             </span>
             <span className="max-sm:hidden">Sonic Wall</span>
           </h1>
           <h2 className="text-lg font-semibold max-lg:hidden">Dashboard</h2>
         </div>
-        <button className="sm:p-3 px-3 py-2 text-base sm:text-lg rounded-lg border border-gray-600 hover:opacity-80 cursor-pointer">
-          {" "}
-          Connect Wallet
-        </button>
+        <ConnectButton />
       </div>
     );
 }
