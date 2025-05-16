@@ -1,38 +1,18 @@
 "use client";
-import { useEffect, useState } from "react"
-import Web3 from "web3";
 
+import { Account } from "@/app/wallet-connect/account";
+import { WalletOptions } from "@/app/wallet-connect/wallet-options";
+import { useAccount } from "wagmi";
 export default function ConnectButton() {
-    const [connectedWallet, setConnectedWallet] = useState("");
-    const [isConnected, setIsConnected] = useState(false);
-    
-      useEffect(() => {
-        const providerUrl = process.env.NEXT_PUBLIC_PROVIDER_URL;
-        const web3 = new Web3(providerUrl);
-          let provider = (window as any).ethereum;
-          
-        if (typeof provider !== "undefined") {
-            provider.request({ method: 'eth_requestAccounts' }).then(accounts => {
-                const account = accounts[0];
-                setConnectedWallet(account);
-          }).catch((err) => {
-            console.log(err);
-          });
-       
-        }
-      }, [isConnected]);
-
-
-    function connectWallet() {
-        setIsConnected(!isConnected);
-    }
-    function shortenAddress(address:string) {
-      return `${address.slice(0, 6)}...${address.slice(-4)}`;
-    }
-
-
+   
+  function ConnectWallet() {
+    const { isConnected } = useAccount();
+    if (isConnected) return <Account />;
+    return <WalletOptions />;
+  }
+ 
     return (
-    //   
+  <ConnectWallet />
     );
 }
 {/* <button */}

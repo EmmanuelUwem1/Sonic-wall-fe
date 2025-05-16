@@ -5,6 +5,8 @@ import { WagmiProvider } from "wagmi";
 import { config } from "../../config";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+
+
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"], // Choose the weights you need
@@ -33,6 +35,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const queryClient = new QueryClient();
+
+  
   return (
     <html lang="en" className={inter.className}>
       <body className="h-screen w-screen overflow-hidden">
