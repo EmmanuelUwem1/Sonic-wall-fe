@@ -1,4 +1,4 @@
-
+"use client"
 
 import { Account } from "@/app/wallet-connect/account";
 import { WalletOptions } from "@/app/wallet-connect/wallet-options";
