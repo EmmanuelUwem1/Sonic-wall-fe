@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { WagmiProvider } from "wagmi";
-import { config } from "../../config";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
+import { Providers } from "./providers/providers";
 
 
 const inter = Inter({
@@ -34,17 +31,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const queryClient = new QueryClient();
 
   
   return (
     <html lang="en" className={inter.className}>
       <body className="h-screen w-screen overflow-hidden">
-        <WagmiProvider config={config}>
-          <QueryClientProvider client={queryClient}>
+        <Providers>
             {children}
-          </QueryClientProvider>
-        </WagmiProvider>
+            </Providers>
       </body>
     </html>
   );
