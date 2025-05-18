@@ -16,7 +16,7 @@ export default function IntegrationCard() {
           <div className="flex flex-col gap-2">
             <h2 className="font-bold text-xl">Integration wizard</h2>
             <p className="text-base font-normal opacity-80">
-              Get started with Sonic-Wall{" "}
+              Plug and play{" "}
             </p>
           </div>
         </div>

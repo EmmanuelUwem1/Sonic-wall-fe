@@ -42,7 +42,7 @@ function SideNav() {
     return (
       <>
         {/* // for desktop */}
-        <div className="flex flex-col justify-start fixed -left-full transition-class lg:sticky lg:top-0 items-start p-4 bg-[#061224] w-[20vw] min-w-60 max-lg:hidden cursor-pointer">
+        <div className="flex flex-col justify-start fixed -left-full transition-class lg:sticky lg:top-0 items-start lg:h-screen p-4 bg-[#061224] w-[20vw] min-w-60 max-lg:hidden cursor-pointer">
           <h1 className="flex justify-start items-center gap-3 font-bold text-2xl">
             <span className="relative h-12 w-12 rounded-2xl overflow-hidden">
               <Image

@@ -1,8 +1,5 @@
-import SideNav from "@/components/side-nav";
-import Heading from "@/components/heading";
 import FlexCard from "@/components/flex-card";
 import TrafficCard from "@/components/traffic-card";
-import PageTransitionEffect from "@/components/page-transition-effect";
 import GetStarted from "@/components/get-started-card";
 import IntegrationCard from "@/components/integration-card";
 import BlockedCard from "@/components/blocked-card";
@@ -14,12 +11,11 @@ export default function Home() {
   ];
  
   return (
-    <PageTransitionEffect>
-      <main className="flex w-full h-full bg-[#1A1F29] relative max-lg:pb-20">
-        <SideNav />
 
-        <div className="flex flex-col w-full justify-start items-start gap-4 pt-4 pl-4 pr-4 pb-8 sm:pt-6 sm:pl-6 sm:pr-6 sm:pb-10 md:overflow-y-scroll">
-          <Heading />
+       
+
+        
+         <>
           <div className="flex gap-3 justify-start items-center w-full flex-wrap lg:flex-nowrap">
             {data.map((data, index) => (
               <FlexCard
@@ -41,8 +37,7 @@ export default function Home() {
               <GetStarted />
             </div>
           </div>
-        </div>
-      </main>
-    </PageTransitionEffect>
+        </>
+     
   );
 }
