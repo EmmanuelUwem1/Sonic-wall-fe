@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import ContextProvider from "@/context";
+import ContextProvider from "@/context/AppkitProvider";
 import { headers } from "next/headers"; 
 
 
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 };
 
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -39,7 +39,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.className}>
       <body className="h-screen w-screen overflow-hidden">
-        <ContextProvider cookies={cookies}>{children}</ContextProvider>
+        <ContextProvider cookies={cookies}>
+          {children}
+        </ContextProvider>
       </body>
     </html>
   );

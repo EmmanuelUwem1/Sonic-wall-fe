@@ -1,9 +1,9 @@
 "use client";
 
-import { wagmiAdapter, projectId } from "@/config";
+import { wagmiAdapter, projectId } from "./config"; 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createAppKit } from "@reown/appkit/react";
-import { mainnet, arbitrum } from "@reown/appkit/networks";
+import { mainnet, arbitrum, bsc } from "@reown/appkit/networks";
 import React, { type ReactNode } from "react";
 import { cookieToInitialState, WagmiProvider, type Config } from "wagmi";
 
@@ -16,17 +16,18 @@ if (!projectId) {
 
 // Set up metadata
 const metadata = {
-  name: "appkit-example",
-  description: "AppKit Example",
-  url: "https://appkitexampleapp.com", // origin must match your domain & subdomain
-  icons: ["https://avatars.githubusercontent.com/u/179229932"],
+  name: "sonic-wall",
+  description:
+    "smart contract firewall built on sonic for real-time fraud detection",
+  url: "https://sonic-wall-fe.vercel.app/", // origin must match your domain & subdomain
+  icons: ["https://sonic-wall-fe.vercel.app/favicon-32x32.png"], // 512x512px icon
 };
 
 // Create the modal
-const modal = createAppKit({
+export const modal = createAppKit({
   adapters: [wagmiAdapter],
   projectId,
-  networks: [mainnet, arbitrum],
+  networks: [mainnet, arbitrum, bsc],
   defaultNetwork: mainnet,
   metadata: metadata,
   features: {

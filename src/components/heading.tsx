@@ -1,6 +1,6 @@
 
 import Image from "next/image";
-import ConnectButton from "@/app/wallet-connect/button";
+import ConnectButton from "@/context/connectbutton";
   function Heading() {
 
 
@@ -9,10 +9,10 @@ import ConnectButton from "@/app/wallet-connect/button";
       <div className="flex justify-between items-center w-full">
         <div className="flex justify-start items-center gap-3">
           <h1 className="flex justify-start items-center gap-3 font-bold text-2xl lg:hidden">
-            <span className="relative h-12 w-12 md:h-14 md:w-14 rounded-2xl overflow-hidden">
+            <span className="relative h-10 w-10 md:h-14 md:w-14 rounded-2xl overflow-hidden">
               <Image
                 alt=" logo"
-                src={"/sonic wal logo.jpg"}
+                src={"/apple-touch-icon.png"}
                 layout="fill"
                 objectFit="contain"
                 objectPosition="center"
@@ -25,7 +25,9 @@ import ConnectButton from "@/app/wallet-connect/button";
           </h1>
           <h2 className="text-lg font-semibold max-lg:hidden">Dashboard</h2>
         </div>
-        <ConnectButton />
+        <div className="flex justify-center items-center">
+          <ConnectButton />
+        </div>
       </div>
     );
 }
