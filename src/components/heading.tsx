@@ -1,7 +1,8 @@
 
 import Image from "next/image";
 // import ConnectButton from "@/context/connectbutton"
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+// import { ConnectButton } from "@rainbow-me/rainbowkit";
+import CustomConnectButton from "./CustomButton";
   function Heading() {
 
 
@@ -27,7 +28,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
           <h2 className="text-lg font-semibold max-lg:hidden">Dashboard</h2>
         </div>
         <div className="flex justify-center items-center">
-          <ConnectButton />
+          <CustomConnectButton />
         </div>
       </div>
     );

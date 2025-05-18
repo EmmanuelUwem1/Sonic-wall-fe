@@ -38,7 +38,7 @@ export default async function RootLayout({
   
   return (
     <html lang="en" className={inter.className}>
-      <body className="h-screen w-screen overflow-hidden">
+      <body className="">
         <ContextProvider>
           {children}
         </ContextProvider>

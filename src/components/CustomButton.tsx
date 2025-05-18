@@ -1,5 +1,6 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-export const CustomBotton = ({ className }: { className: string }) => {
+
+export default function CustomConnectButton() {
   return (
     <ConnectButton.Custom>
       {({
@@ -11,96 +12,61 @@ export const CustomBotton = ({ className }: { className: string }) => {
         authenticationStatus,
         mounted,
       }) => {
-        // Note: If your app doesn't use authentication, you
-        // can remove all 'authenticationStatus' checks
         const ready = mounted && authenticationStatus !== "loading";
         const connected =
           ready &&
           account &&
           chain &&
           (!authenticationStatus || authenticationStatus === "authenticated");
+
         return (
           <div
             {...(!ready && {
               "aria-hidden": true,
-              style: {
-                opacity: 0,
-                pointerEvents: "none",
-                userSelect: "none",
-              },
+              style: { opacity: 0, pointerEvents: "none", userSelect: "none" },
             })}
           >
-            {(() => {
-              if (!connected) {
-                return (
-                  <button
-                    className={`${className} border border-red-600 text-sm text-red-700 px-3.5 py-2 rounded-lg bg-red-100 font-semibold`}
-                    onClick={openConnectModal}
-                    type="button"
-                  >
-                    <span className="block md:hidden">Connect</span>
-                    <span className="hidden md:block">Connect Wallet</span>
-                  </button>
-                );
-              }
-              if (chain.unsupported) {
-                return (
-                  <button
-                    className="border border-red-600 text-sm text-red-700 px-3.5 py-2 rounded-lg bg-red-100 font-semibold"
-                    onClick={openChainModal}
-                    type="button"
-                  >
-                    Wrong network
-                  </button>
-                );
-              }
-              return (
-                <div style={{ display: "flex", gap: 12 }}>
-                  <button
-                    onClick={openChainModal}
-                    style={{ display: "flex", alignItems: "center" }}
-                    type="button"
-                    className="border border-red-600 text-sm text-red-700 px-3.5 py-2 rounded-lg bg-red-100 font-semibold"
-                  >
-                    {chain.hasIcon && (
-                      <div
-                        style={{
-                          background: chain.iconBackground,
-                          width: 12,
-                          height: 12,
-                          borderRadius: 999,
-                          overflow: "hidden",
-                          marginRight: 4,
-                        }}
-                      >
-                        {chain.iconUrl && (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img
-                            alt={chain.name ?? "Chain icon"}
-                            src={chain.iconUrl}
-                            style={{ width: 12, height: 12 }}
-                          />
-                        )}
-                      </div>
-                    )}
-                    {chain.name}
-                  </button>
-                  <button
-                    className="border border-red-600 text-sm text-red-700 px-3.5 py-2 rounded-lg bg-red-100 font-semibold"
-                    onClick={openAccountModal}
-                    type="button"
-                  >
-                    {account.displayName}
-                    {account.displayBalance
-                      ? ` (${account.displayBalance})`
-                      : ""}
-                  </button>
-                </div>
-              );
-            })()}
+            {!connected ? (
+              <button
+                onClick={openConnectModal}
+                className="px-4 py-2 bg-[#2789be] text-white rounded-lg hover:opacity-80 **:transition"
+              >
+                Connect Wallet
+              </button>
+            ) : chain.unsupported ? (
+              <button
+                onClick={openChainModal}
+                className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+              >
+                Wrong Network
+              </button>
+            ) : (
+              <div className="flex gap-4">
+                <button
+                  onClick={openChainModal}
+                  className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition flex items-center"
+                >
+                  {chain.hasIcon && (
+                    <img
+                      src={chain.iconUrl}
+                      alt={chain.name}
+                      className="w-4 h-4 mr-2 rounded-full"
+                    />
+                  )}
+                  {chain.name}
+                </button>
+                <button
+                  onClick={openAccountModal}
+                  className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
+                >
+                  {account.displayName}{" "}
+                  {account.displayBalance ? `(${account.displayBalance})` : ""}
+                </button>
+              </div>
+            )}
           </div>
         );
       }}
     </ConnectButton.Custom>
   );
-};
+}

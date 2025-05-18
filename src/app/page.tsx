@@ -15,10 +15,10 @@ export default function Home() {
  
   return (
     <PageTransitionEffect>
-      <main className="flex w-full h-full bg-[#1A1F29] relative max-lg:pb-18">
+      <main className="flex w-full h-full bg-[#1A1F29] relative max-lg:pb-20">
         <SideNav />
 
-        <div className="flex flex-col w-full justify-start items-start gap-4 pt-4 pl-4 pr-4 pb-8 sm:pt-6 sm:pl-6 sm:pr-6 sm:pb-10 overflow-y-scroll">
+        <div className="flex flex-col w-full justify-start items-start gap-4 pt-4 pl-4 pr-4 pb-8 sm:pt-6 sm:pl-6 sm:pr-6 sm:pb-10 md:overflow-y-scroll">
           <Heading />
           <div className="flex gap-3 justify-start items-center w-full flex-wrap lg:flex-nowrap">
             {data.map((data, index) => (
