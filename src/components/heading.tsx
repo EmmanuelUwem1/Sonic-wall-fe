@@ -26,7 +26,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
           </h1>
           <h2 className="text-lg font-semibold max-lg:hidden">Dashboard</h2>
         </div>
-        <div className="flex justify-center items-center w-full h-full border border-gray">
+        <div className="flex justify-center items-center">
           <ConnectButton />
         </div>
       </div>

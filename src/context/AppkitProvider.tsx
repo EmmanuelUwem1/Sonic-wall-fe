@@ -5,7 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createAppKit } from "@reown/appkit/react";
 import { mainnet, arbitrum, bsc } from "@reown/appkit/networks";
 import React, { type ReactNode } from "react";
-import { cookieToInitialState, WagmiProvider, type Config } from "wagmi";
+// import { cookieToInitialState, type Config } from "wagmi";
+import { AppWagmiProvider } from "./WagmiProvider";
 
 // Set up queryClient
 const queryClient = new QueryClient();
@@ -37,23 +38,15 @@ export const modal = createAppKit({
 
 function ContextProvider({
   children,
-  cookies,
 }: {
   children: ReactNode;
-  cookies: string | null;
 }) {
-  const initialState = cookieToInitialState(
-    wagmiAdapter.wagmiConfig as Config,
-    cookies
-  );
+  // Removed unused initialState assignment
 
   return (
-    <WagmiProvider
-      config={wagmiAdapter.wagmiConfig as Config}
-      initialState={initialState}
-    >
+    <AppWagmiProvider>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </WagmiProvider>
+    </AppWagmiProvider>
   );
 }
 

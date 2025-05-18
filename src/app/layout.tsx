@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import ContextProvider from "@/context/AppkitProvider";
-import { headers } from "next/headers"; 
+// import { headers } from "next/headers"; 
 
 
 const inter = Inter({
@@ -33,13 +33,13 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const headersObj = await headers();
-  const cookies = headersObj.get("cookie");
+  // const headersObj = await headers();
+  // const cookies = headersObj.get("cookie");
   
   return (
     <html lang="en" className={inter.className}>
       <body className="h-screen w-screen overflow-hidden">
-        <ContextProvider cookies={cookies}>
+        <ContextProvider>
           {children}
         </ContextProvider>
       </body>
