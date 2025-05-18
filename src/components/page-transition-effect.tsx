@@ -8,7 +8,7 @@ export default function PageTransitionEffect({
 }>) {
     return (
       <motion.div
-        className="flex h-screen w-screen overflow-x-hidden overflow-y-scroll relative pb-8 bg-[#1A1F29]"
+        className="flex h-screen w-screen overflow-x-hidden overflow-y-scroll relative bg-[#1A1F29]"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4 }}

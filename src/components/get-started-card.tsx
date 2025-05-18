@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function GetStarted() {
     return (
-      <div className="flex border border-gray-700 rounded-lg p-4 cursor-pointer hover:bg-[#2789be0f] w-full h-full justify-center items-center flex-col gap-4 transition-class">
+      <div className="flex border border-gray-700 rounded-lg p-4 cursor-pointer hover:bg-[#2789be0f] w-full h-full justify-center items-center flex-col gap-4 transition-class max-lg:mb-8">
         <span className="flex justify-center items-center bg-[#2789be1f] rounded-full p-3">
           <span className="relative flex justify-center items-center h-20 w-20 rounded-full overflow-hidden">
             <Image
