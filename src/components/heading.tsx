@@ -1,7 +1,7 @@
 
 import Image from "next/image";
-import ConnectButton from "./connect-button";
-function Heading() {
+import ConnectButton from "@/app/wallet-connect/button";
+  function Heading() {
 
 
 
