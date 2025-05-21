@@ -83,8 +83,8 @@ body {
 
 .gradient-class{
   background-image:
-radial-gradient(at 40% 20%, hsla(204,75%,40%,1) 0px, transparent 50%),
-radial-gradient(at 80% 100%, hsla(242,100%,70%,1) 0px, transparent 50%);
+radial-gradient(at 40% 20%, rgba(25, 117, 179, 0.745) 0px, transparent 50%),
+radial-gradient(at 80% 100%, rgba(107, 102, 255, 0.833) 0px, transparent 50%);
 }
 
 .glass{

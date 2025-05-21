@@ -1,43 +1,76 @@
+"use client";
+import { useEffect, useState } from "react";
 import FlexCard from "@/components/flex-card";
-import TrafficCard from "@/components/traffic-card";
 import GetStarted from "@/components/get-started-card";
 import IntegrationCard from "@/components/integration-card";
+import { getStats } from "@/lib/api/actions";
+import TrafficCard from "@/components/traffic-card";
 import BlockedCard from "@/components/blocked-card";
+
+type Stats = {
+  totalCalls: string;
+  blockedPercentage: string;
+  averageLatencyMs: string;
+};
+
 export default function Home() {
+  const [stats, setStats] = useState<Stats | null>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchData = async () => {
+      try {
+        const statsRes = await getStats();
+        if (isMounted) {
+          setStats(statsRes);
+        }
+      } catch {
+        // handle error if needed
+      }
+    };
+
+    fetchData();
+    const interval = setInterval(fetchData, 5000); // Refetch every 5 seconds
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
+  }, []);
+
   const data = [
-    { title: "Total Calls", value: "12,840", unit: "" },
-    { title: "% Blocked", value: "7.1", unit: " % " },
-    { title: "Average Latency", value: "204", unit: "ms" },
+    { title: "Total Calls", value: stats?.totalCalls ?? "-", unit: "" },
+    { title: "% Blocked", value: stats?.blockedPercentage ?? "-", unit: "%" },
+    {
+      title: "Average Latency",
+      value: stats?.averageLatencyMs ?? "-",
+      unit: "ms",
+    },
   ];
- 
+
   return (
+    <>
+      <div className="flex gap-3 justify-start items-center w-full flex-wrap lg:flex-nowrap">
+        {data.map((item, index) => (
+          <FlexCard
+            title={item.title}
+            unit={item.unit}
+            value={item.value}
+            key={index}
+          />
+        ))}
+      </div>
+      <div className="flex gap-4 w-full lg:flex-nowrap flex-wrap  justify-between items-start">
+        <div className="flex w-full lg:w-[60%] flex-col justify-start items-start gap-4">
+          <TrafficCard />
+          <IntegrationCard />
 
-       
-
-        
-         <>
-          <div className="flex gap-3 justify-start items-center w-full flex-wrap lg:flex-nowrap">
-            {data.map((data, index) => (
-              <FlexCard
-                title={data.title}
-                unit={data.unit}
-                value={data.value}
-                key={index}
-              />
-            ))}
-          </div>
-          <div className="flex gap-4 w-full lg:flex-nowrap flex-wrap  justify-between items-start">
-            <div className="flex w-full lg:w-[60%] flex-col justify-start items-start gap-4">
-              <TrafficCard />
-              {/* integration wizard */}
-              <IntegrationCard />
-            </div>
-            <div className="flex w-full lg:w-[40%] flex-col justify-start items-start gap-4 max-lg:mb-18">
-              <BlockedCard />
-              <GetStarted />
-            </div>
-          </div>
-        </>
-     
+        </div>
+        <div className="flex w-full lg:w-[40%] flex-col justify-start items-start gap-4 max-lg:mb-18">
+          <BlockedCard />
+          <GetStarted />
+        </div>
+      </div>
+    </>
   );
 }
