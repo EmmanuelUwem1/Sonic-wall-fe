@@ -42,9 +42,9 @@ function SideNav() {
     return (
       <>
         {/* // for desktop */}
-        <div className="flex flex-col justify-start fixed -left-full transition-class lg:sticky lg:top-0 items-start lg:h-screen p-4 bg-[#061224] w-[20vw] min-w-60 max-lg:hidden cursor-pointer">
-          <h1 className="flex justify-start items-center gap-3 font-bold text-2xl">
-            <span className="relative h-12 w-12 rounded-2xl overflow-hidden">
+        <div className="flex glass flex-col justify-start fixed -left-full transition-class lg:sticky lg:top-0 items-start lg:h-screen p-4 bg-[#06122438] w-[20vw] min-w-60 max-lg:hidden cursor-pointer">
+          <h1 className="flex justify-start items-center gap-3 font-bold text-2xl pt-4">
+            <span className="relative h-10 w-10 rounded-2xl overflow-hidden">
               <Image
                 alt=" logo"
                 src={"/apple-touch-icon.png"}
@@ -62,8 +62,8 @@ function SideNav() {
               <Link
                 href={link.href}
                 key={link.title}
-                className={`text-base flex opacity-90 py-2 hover:bg-[#1E2A38] transition-class hover:text-[#4DA8DA] px-4 gap-3 font-medium w-full rounded-lg ${
-                  link.href === pathName ? "bg-[#1E2A38] text-[#4DA8DA]" : ""
+                className={`text-base flex opacity-90 py-2 hover:bg-[#13498676] transition-class hover:text-[#4DA8DA] px-4 gap-3 font-medium w-full rounded-lg ${
+                  link.href === pathName ? "bg-[#13498676] text-[#4DA8DA]" : ""
                 }`}
               >
                 <span className="relative h-6 w-6 flex justify-center items-center">
