@@ -81,7 +81,7 @@ function SideNav() {
           </nav>
         </div>
         {/* // for mobile */}
-        <div className="flex w-full justify-between shadow-lg fixed bottom-0 left-0 lg:hidden bg-[#1A1F29] h-18 z-[10000] py-1 px-2 gap-1">
+        <div className="flex w-full justify-between shadow-lg fixed bottom-0 left-0 lg:hidden bg-[#06122460] h-18 z-[10000] py-1 px-2 gap-1 glass rounded-t-lg">
           {navLinks.map((link) => (
             <Link
               href={link.href}
