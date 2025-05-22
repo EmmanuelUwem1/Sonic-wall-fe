@@ -30,5 +30,5 @@ export default function WalletGate() {
     sign();
   }, [isConnected, signature]);
 
-  return null; // No UI needed, but you can show loading or status if you want
+  return null; 
 }
