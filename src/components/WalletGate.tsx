@@ -20,7 +20,7 @@ export default function WalletGate() {
   useEffect(() => {
     const sign = async () => {
       if (isConnected && window.ethereum && !signature) {
-        const provider = new ethers.BrowserProvider(window.ethereum);
+        const provider = new ethers.BrowserProvider(window.ethereum as unknown as ethers.Eip1193Provider);
         const signer = await provider.getSigner();
         const message = "Please sign this message to continue.";
         const sig = await signer.signMessage(message);
