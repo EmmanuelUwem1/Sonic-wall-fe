@@ -10,32 +10,32 @@ function SideNav() {
       {
         title: "Dashboard",
         href: "/",
-        icon: "/dashboard.png",
-        active: "/dashboard-active.png",
+        icon: "/dasboard.png",
+        active: "/dasboard.png",
       },
       {
         title: "Rules",
         href: "/dashboard/rules",
-        icon: "/rule.png",
-        active: "/rule-active.png",
+        icon: "/trade.png",
+        active: "/trade.png",
       },
       {
         title: "Analytics",
         href: "/dashboard/analytics",
-        icon: "/analytics.png",
-        active: "/analytics-active.png",
+        icon: "/Vector.png",
+        active: "/Vector.png",
       },
       {
         title: "Integration",
         href: "/dashboard/integration",
-        icon: "/integration.png",
-        active: "/integration-active.png",
+        icon: "/carbon_integration.png",
+        active: "/carbon_integration.png",
       },
       {
         title: "Settings",
         href: "/dashboard/settings",
         icon: "/settings.png",
-        active: "/settings-active.png",
+        active: "/Settings.png",
       },
     ];
 
@@ -62,8 +62,10 @@ function SideNav() {
               <Link
                 href={link.href}
                 key={link.title}
-                className={`text-base flex opacity-90 py-2 hover:bg-[#13498676] transition-class hover:text-[#4DA8DA] px-4 gap-3 font-medium w-full rounded-lg ${
-                  link.href === pathName ? "bg-[#13498676] text-[#4DA8DA]" : ""
+                className={`text-base flex py-2 hover-button text-[#DDDDDD] transition-class px-4 gap-3 font-medium w-full rounded-lg ${
+                  link.href === pathName
+                    ? "gradient-button-bg opacity-100 text-[#DDDDDD]"
+                    : "opacity-70"
                 }`}
               >
                 <span className="relative h-6 w-6 flex justify-center items-center">
@@ -86,9 +88,9 @@ function SideNav() {
             <Link
               href={link.href}
               key={link.title}
-              className={`text-xs flex flex-col justify-center items-center opacity-90 py-2 px-1 transition-class hover:text-[#4DA8DA] hover:bg-[#4da9da15] sm:px-4 gap-3 font-medium w-full rounded-lg ${
+              className={`text-xs flex flex-col justify-center items-center opacity-90 py-2 px-1 transition-class hover-button sm:px-4 gap-3 font-medium w-full rounded-lg ${
                 link.href === pathName
-                  ? " text-[#4DA8DA] bg-[#4da9da15]"
+                  ? " gradient-button-bg opacity-100 text-[#DDDDDD]"
                   : "text-[#ffffffa5]"
               }`}
             >

@@ -5,6 +5,7 @@ import ContextProvider from "@/context/AppkitProvider";
 import PageTransitionEffect from "@/components/page-transition-effect";
 import SideNav from "@/components/side-nav";
 import Heading from "@/components/heading";
+import WalletGate from "@/components/WalletGate";
 // import { headers } from "next/headers"; 
 
 
@@ -45,10 +46,11 @@ export default async function RootLayout({
   
   return (
     <html lang="en" className={inter.className}>
-      <body className="gradient-class ">
+      <body className="gradient-class bg-[#000000] ">
         <ContextProvider>
+        <WalletGate />
           <PageTransitionEffect>
-            <main className="flex w-full h-full bg-[#1a1f291e] relative max-lg:pb-20">
+            <main className="flex w-full h-full relative max-lg:pb-20">
               <SideNav />
               <div className="flex flex-col w-full justify-start items-start gap-4 pt-4 pl-4 pr-4 pb-8 sm:pt-6 sm:pl-6 sm:pr-6 sm:pb-10 md:overflow-y-scroll">
                 <Heading />

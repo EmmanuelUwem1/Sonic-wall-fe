@@ -80,12 +80,12 @@ export default function BlockedCard() {
               >
                 <div className="flex">{formatAddress(item.address)}</div>
                 <button
-                  className="cursor-pointer bg-[#2789bed1] px-3 py-2 rounded-lg flex items-center justify-center w-32 hover:opacity-80 transition-class"
+                  className="cursor-pointer gradient-button-bg opacity-100 text-[#DDDDDD] px-3 py-2 rounded-lg flex items-center justify-center w-32 hover:opacity-80 transition-class"
                   onClick={() => handleUnblock(item.address)}
                   disabled={loadingUnBlock}
                   title="Unblock"
                 >
-                  { "Unblock"}
+                  {"Unblock"}
                 </button>
               </div>
             ))
@@ -104,7 +104,7 @@ export default function BlockedCard() {
           disabled={loadingBlock}
         />
         <button
-          className="cursor-pointer self-end transition-class bg-[#ff2d2db5] px-3 py-2 mr-1 rounded-lg hover:opacity-80 transition-class flex items-center justify-center w-32"
+          className="cursor-pointer self-end transition-class gradient-button-bg opacity-100 text-[#DDDDDD] px-3 py-2 mr-1 rounded-lg hover:opacity-80 transition-class flex items-center justify-center w-32"
           onClick={handleBlock}
           disabled={loadingBlock}
         >

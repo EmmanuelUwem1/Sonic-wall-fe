@@ -15,15 +15,11 @@ export default function IntegrationCard() {
           </span>
           <div className="flex flex-col gap-2">
             <h2 className="font-bold text-xl">Integration wizard</h2>
-            <p className="text-base font-normal opacity-80">
-              Plug and play{" "}
-            </p>
-            <p className="text-base font-normal opacity-80">
-              Coming soon
-            </p>
+            <p className="text-base font-normal opacity-80">Plug and play </p>
+            <p className="text-base font-normal opacity-80">Coming soon</p>
           </div>
         </div>
-        <button className="self-end text-right bg-[#2789be] px-3 py-2 rounded-lg cursor-pointer hover:opacity-90 transition-class">
+        <button className="self-end text-right gradient-button-bg opacity-100 text-[#DDDDDD] px-3 py-2 rounded-lg cursor-pointer hover:opacity-90 transition-class">
           Configure
         </button>
       </div>

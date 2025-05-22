@@ -56,7 +56,7 @@ export default function TrafficCard() {
   }, []);
 
   return (
-    <div className="w-full bg-[#161a2385] text-white border border-gray-700 rounded-lg p-4 glass">
+    <div className="w-full bg-[#161a2359] text-white border border-gray-700 rounded-lg p-4 glass">
       <h2 className="text-lg font-semibold mb-4 text-left">Contract Traffic</h2>
       <div className="overflow-x-auto">
         <table className="w-full border-collapse">
