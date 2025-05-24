@@ -35,7 +35,7 @@ function SideNav() {
         title: "Settings",
         href: "/dashboard/settings",
         icon: "/settings.png",
-        active: "/Settings.png",
+        active: "/settings.png",
       },
     ];
 
