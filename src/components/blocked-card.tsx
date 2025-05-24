@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useAccount } from "wagmi";
 import formatAddress from "@/lib/utils";
 
 type Blocked = {
@@ -20,6 +21,7 @@ function saveBlockedAddresses(addresses: Blocked[]) {
 }
 
 export default function BlockedCard() {
+  const { isConnected } = useAccount();
   const [blockedAddresses, setBlockedAddresses] = useState<Blocked[]>([]);
   const [input, setInput] = useState("");
   const [loadingBlock, setLoadingBlock] = useState(false);
@@ -76,7 +78,7 @@ export default function BlockedCard() {
                 <button
                   className="cursor-pointer gradient-button-bg opacity-100 text-[#DDDDDD] px-3 py-2 rounded-lg flex items-center justify-center w-32 hover:opacity-80 transition-class"
                   onClick={() => handleUnblock(item.address)}
-                  disabled={loadingUnBlock}
+                  disabled={loadingUnBlock || !isConnected}
                   title="Unblock"
                 >
                   {"Unblock"}
@@ -95,16 +97,21 @@ export default function BlockedCard() {
           className="flex w-[60%] bg-transparent border-b border-gray-500 outline-none"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          disabled={loadingBlock}
+          disabled={loadingBlock || !isConnected}
         />
         <button
           className="cursor-pointer self-end transition-class gradient-button-bg opacity-100 text-[#DDDDDD] px-3 py-2 mr-1 rounded-lg hover:opacity-80 transition-class flex items-center justify-center w-32"
           onClick={handleBlock}
-          disabled={loadingBlock}
+          disabled={loadingBlock || !isConnected}
         >
           {loadingBlock ? "Blocking..." : "Block"}
         </button>
       </div>
+      {!isConnected && (
+        <div className="text-center text-sm text-red-400 mt-2 opacity-80">
+          Please connect your wallet to manage blocked addresses.
+        </div>
+      )}
     </>
   );
 }
