@@ -1,11 +1,23 @@
 "use client";
 import { useEffect, useState } from "react";
-import { getBlocked, blockAddress, unblockAddress } from "@/lib/api/actions";
 import formatAddress from "@/lib/utils";
+
 type Blocked = {
   id: number;
   address: string;
 };
+
+const STORAGE_KEY = "blockedAddresses";
+
+function loadBlockedAddresses(): Blocked[] {
+  if (typeof window === "undefined") return [];
+  const data = localStorage.getItem(STORAGE_KEY);
+  return data ? JSON.parse(data) : [];
+}
+
+function saveBlockedAddresses(addresses: Blocked[]) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(addresses));
+}
 
 export default function BlockedCard() {
   const [blockedAddresses, setBlockedAddresses] = useState<Blocked[]>([]);
@@ -13,53 +25,35 @@ export default function BlockedCard() {
   const [loadingBlock, setLoadingBlock] = useState(false);
   const [loadingUnBlock, setLoadingUnBlock] = useState(false);
 
-  // Fetch blocked addresses on mount
+  // Load blocked addresses from localStorage on mount
   useEffect(() => {
-    let isMounted = true;
-    const fetchBlocked = async () => {
-      try {
-        const data = await getBlocked();
-        if (isMounted && Array.isArray(data)) {
-          setBlockedAddresses(data);
-        }
-      } catch {
-        // handle error if needed
-      }
-    };
-    fetchBlocked();
-    return () => {
-      isMounted = false;
-    };
-  }, [loadingBlock, loadingUnBlock]);
-
-  // Helper to slice address
+    setBlockedAddresses(loadBlockedAddresses());
+  }, []);
 
   // Handle block address
   const handleBlock = async () => {
     if (!input.trim()) return;
     setLoadingBlock(true);
-    try {
-      await blockAddress({ address: input.trim() });
-      // Refetch blocked addresses after blocking
-      const data = await getBlocked();
-      setBlockedAddresses(data);
+    const address = input.trim();
+    // Prevent duplicates
+    if (blockedAddresses.some((item) => item.address === address)) {
+      setLoadingBlock(false);
       setInput("");
-    } catch {
-      // handle error if needed
+      return;
     }
+    const newBlocked = [...blockedAddresses, { id: Date.now(), address }];
+    setBlockedAddresses(newBlocked);
+    saveBlockedAddresses(newBlocked);
+    setInput("");
     setLoadingBlock(false);
   };
 
   // Handle unblock address
-  const handleUnblock = async (address:string) => {
+  const handleUnblock = async (address: string) => {
     setLoadingUnBlock(true);
-    try {
-      await unblockAddress(address);
-      const data = await getBlocked();
-      setBlockedAddresses(data);
-    } catch {
-      // handle error if needed
-    }
+    const updated = blockedAddresses.filter((item) => item.address !== address);
+    setBlockedAddresses(updated);
+    saveBlockedAddresses(updated);
     setLoadingUnBlock(false);
   };
 
@@ -80,12 +74,12 @@ export default function BlockedCard() {
               >
                 <div className="flex">{formatAddress(item.address)}</div>
                 <button
-                  className="cursor-pointer bg-[#2789bed1] px-3 py-2 rounded-lg flex items-center justify-center w-32 hover:opacity-80 transition-class"
+                  className="cursor-pointer gradient-button-bg opacity-100 text-[#DDDDDD] px-3 py-2 rounded-lg flex items-center justify-center w-32 hover:opacity-80 transition-class"
                   onClick={() => handleUnblock(item.address)}
                   disabled={loadingUnBlock}
                   title="Unblock"
                 >
-                  { "Unblock"}
+                  {"Unblock"}
                 </button>
               </div>
             ))
@@ -104,7 +98,7 @@ export default function BlockedCard() {
           disabled={loadingBlock}
         />
         <button
-          className="cursor-pointer self-end transition-class bg-[#ff2d2db5] px-3 py-2 mr-1 rounded-lg hover:opacity-80 transition-class flex items-center justify-center w-32"
+          className="cursor-pointer self-end transition-class gradient-button-bg opacity-100 text-[#DDDDDD] px-3 py-2 mr-1 rounded-lg hover:opacity-80 transition-class flex items-center justify-center w-32"
           onClick={handleBlock}
           disabled={loadingBlock}
         >

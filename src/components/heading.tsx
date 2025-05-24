@@ -33,7 +33,7 @@ function Heading() {
         </h1>
         <h2 className="text-lg font-semibold max-lg:hidden">{title}</h2>
       </div>
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center gradient-button-bg rounded-lg">
         <ConnectButton />
       </div>
     </div>
