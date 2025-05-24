@@ -31,7 +31,7 @@ export default function Home() {
     };
 
     fetchData();
-    const interval = setInterval(fetchData, 5000); // Refetch every 5 seconds
+    const interval = setInterval(fetchData, 1000); // Refetch every 5 seconds
     return () => {
       isMounted = false;
       clearInterval(interval);
