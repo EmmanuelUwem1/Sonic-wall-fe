@@ -1,11 +1,23 @@
 "use client";
 import { useEffect, useState } from "react";
-import { getBlocked, blockAddress, unblockAddress } from "@/lib/api/actions";
 import formatAddress from "@/lib/utils";
+
 type Blocked = {
   id: number;
   address: string;
 };
+
+const STORAGE_KEY = "blockedAddresses";
+
+function loadBlockedAddresses(): Blocked[] {
+  if (typeof window === "undefined") return [];
+  const data = localStorage.getItem(STORAGE_KEY);
+  return data ? JSON.parse(data) : [];
+}
+
+function saveBlockedAddresses(addresses: Blocked[]) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(addresses));
+}
 
 export default function BlockedCard() {
   const [blockedAddresses, setBlockedAddresses] = useState<Blocked[]>([]);
@@ -13,53 +25,35 @@ export default function BlockedCard() {
   const [loadingBlock, setLoadingBlock] = useState(false);
   const [loadingUnBlock, setLoadingUnBlock] = useState(false);
 
-  // Fetch blocked addresses on mount
+  // Load blocked addresses from localStorage on mount
   useEffect(() => {
-    let isMounted = true;
-    const fetchBlocked = async () => {
-      try {
-        const data = await getBlocked();
-        if (isMounted && Array.isArray(data)) {
-          setBlockedAddresses(data);
-        }
-      } catch {
-        // handle error if needed
-      }
-    };
-    fetchBlocked();
-    return () => {
-      isMounted = false;
-    };
-  }, [loadingBlock, loadingUnBlock]);
-
-  // Helper to slice address
+    setBlockedAddresses(loadBlockedAddresses());
+  }, []);
 
   // Handle block address
   const handleBlock = async () => {
     if (!input.trim()) return;
     setLoadingBlock(true);
-    try {
-      await blockAddress({ address: input.trim() });
-      // Refetch blocked addresses after blocking
-      const data = await getBlocked();
-      setBlockedAddresses(data);
+    const address = input.trim();
+    // Prevent duplicates
+    if (blockedAddresses.some((item) => item.address === address)) {
+      setLoadingBlock(false);
       setInput("");
-    } catch {
-      // handle error if needed
+      return;
     }
+    const newBlocked = [...blockedAddresses, { id: Date.now(), address }];
+    setBlockedAddresses(newBlocked);
+    saveBlockedAddresses(newBlocked);
+    setInput("");
     setLoadingBlock(false);
   };
 
   // Handle unblock address
-  const handleUnblock = async (address:string) => {
+  const handleUnblock = async (address: string) => {
     setLoadingUnBlock(true);
-    try {
-      await unblockAddress(address);
-      const data = await getBlocked();
-      setBlockedAddresses(data);
-    } catch {
-      // handle error if needed
-    }
+    const updated = blockedAddresses.filter((item) => item.address !== address);
+    setBlockedAddresses(updated);
+    saveBlockedAddresses(updated);
     setLoadingUnBlock(false);
   };
 

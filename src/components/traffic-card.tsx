@@ -1,59 +1,66 @@
 "use client";
-import { useState, useEffect } from "react";
-import { getTraffic } from "@/lib/api/actions";
+// import { useState, useEffect } from "react";
+// import { getTraffic } from "@/lib/api/actions";
 import formatAddress from "@/lib/utils";
-type ApiTraffic = {
-  method: string;
-  from_address: string;
-  id: number;
-  confirmed_at: string | null;
-  to_address: string;
-  call_time: string;
-};
+// type ApiTraffic = {
+//   method: string;
+//   from_address: string;
+//   id: number;
+//   confirmed_at: string | null;
+//   to_address: string;
+//   call_time: string;
+// };
 
-type Traffic = {
-  time: string;
-  sender: string;
-  address: string;
-  method: string;
-};
+// type Traffic = {
+//   time: string;
+//   sender: string;
+//   address: string;
+//   method: string;
+// };
 
-function formatDate(dateString: string) {
-  const date = new Date(dateString);
-  return date.toLocaleString();
-}
+// function formatDate(dateString: string) {
+//   const date = new Date(dateString);
+//   return date.toLocaleString();
+// }
 
 export default function TrafficCard() {
   const tableHeaders = ["Timestamp", "Sender", "Address", "Method"];
-  const [transactions, setTransactions] = useState<Traffic[]>([]);
 
-  useEffect(() => {
-    let isMounted = true;
+  const transactions = [
+    {time:"2:45 PM", sender:"0x9b1..d02a", address:"0x5fc...ef91", method:"transfer"},
+    {time:"2:45 PM", sender:"0x9b1..d02a", address:"0x5fc...ef91", method:"withdraw"},
+    {time:"2:45 PM", sender:"0x9b1..d02a", address:"0x5fc...ef91", method:"transfer"},
+    {time:"2:45 PM", sender:"0x9b1..d02a", address:"0x5fc...ef91", method:"transfer"},
+]
+  // const [transactions, setTransactions] = useState<Traffic[]>([]);
 
-    const fetchTraffic = async () => {
-      try {
-        const data: ApiTraffic[] = await getTraffic();
-        if (isMounted && Array.isArray(data)) {
-          // Map API response to Traffic type
-          const mapped = data.map((item) => ({
-            time: formatDate(item.call_time),
-            sender: item.from_address,
-            address: item.to_address,
-            method: item.method,
-          }));
-          setTransactions(mapped);
-        }
-      } catch {
-        // handle error if needed
-      }
-    };
+  // useEffect(() => {
+  //   let isMounted = true;
 
-    fetchTraffic();
+  //   const fetchTraffic = async () => {
+  //     try {
+  //       const data: ApiTraffic[] = await getTraffic();
+  //       if (isMounted && Array.isArray(data)) {
+  //         // Map API response to Traffic type
+  //         // const mapped = data.map((item) => ({
+  //         //   time: formatDate(item.call_time),
+  //         //   sender: item.from_address,
+  //         //   address: item.to_address,
+  //         //   method: item.method,
+  //         // }));
+  //         // setTransactions(mapped);
+  //       }
+  //     } catch {
+  //       // handle error if needed
+  //     }
+  //   };
 
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+  //   fetchTraffic();
+
+  //   return () => {
+  //     isMounted = false;
+  //   };
+  // }, []);
 
   return (
     <div className="w-full bg-[#161a2359] text-white border border-gray-700 rounded-lg p-4 glass">
